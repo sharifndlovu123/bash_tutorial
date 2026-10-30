@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+# found under cursor controls , under the git doc mentioned
+
+#printf '\e[2J'
+#printf '\e[H'
+printf '\e7' # save cursor position
+printf '\e[20;20H' # Jump somewhere in the middle of the screen
+printf 'hello world' # print hello world
+printf '\e8' # restore cursor position
+
+# cool example of a design
+curl xmas.ysap.sh | bash

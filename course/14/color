@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# 256 bit colors
+for i in {0..255}; do
+    printf "\e[38;5;%smColor %s\e[0m\n" "$i" "$i"
+done
+
+# rgb true bit coloring 24 bit colors
+printf "\e[38;2;%d;%d;%dmRed\e[0m\n" 255 0 0
+printf "\e[38;2;%d;%d;%dmGreen\e[0m\n" 0 255 0
+printf "\e[38;2;%d;%d;%dmBlue\e[0m\n" 0 0 255
