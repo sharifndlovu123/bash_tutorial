@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+cleanup() {
+	echo cleanup function running
+	exit 2
+}
+
+# we end up exiting within the method so we dont get exit code 1
+
+trap cleanup exit
+
+echo script starting
+echo ...
+echo script done
+exit 1

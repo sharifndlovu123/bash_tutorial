@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+cleanup() {
+	echo cleanup function running
+}
+
+#  we want to trap exit here. we can add many.
+# exit here links to the @EXIT caller, means before this script is done
+# it will always run selected CODE.
+# useful for running scripts the del content after
+trap cleanup exit
+
+echo script starting
+echo ...
+echo script done

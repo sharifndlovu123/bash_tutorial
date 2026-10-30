@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# this is new here. exec can execute commands
+# alt syntax to open file {}
+# fd is file descriptor, we can use it to read and write to the pipe
+
+# a simple example when we write content to 3 it gets put into dev/null
+# exec 3>/dev/null
+# echo "hello" >&3
+
+# < = reading, > = writing, <> = reading and writing, pipe is file we open
+
+exec {fd}<>pipe
+
+client() {
+	local name=$1
+
+	while true; do
+		sleep 3
+		echo "[client $name] hello" >&$fd
+	done
+}
+
+client foo &
+client bar &
+client baz &
+
+
+# here we read from the pipe, we can use the fd to read from it
+# we read the already open file descriptor instead of opening the pipe again, this is more efficient
+while read -r -u "$fd" line; do
+	echo "[read line] $line"
+done

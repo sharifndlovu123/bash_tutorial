@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+my-func() {
+	echo "hello world"
+}
+
+# SIGINFO only exists on BSD/macOS (ctrl-t). On Linux use a user signal:
+#   kill -USR1 <pid>
+echo "pid is $$"
+trap my-func SIGUSR1 || exit 1
+
+while true; do
+	sleep 1
+	echo running
+done
+
+# use ctrl + z tp put task into bg, its paused
+# run bg to keep it running
+# run fg to bring it forground
+# run jobs, to see all running jobs
+
+# kill it with kill %number-job
+# SIGTERM is 15, for kill
+# SIGTSTOP is ctrl + z
+
+# kill %% also works
+# %% points to the most recent job
