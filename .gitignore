@@ -1,0 +1,33 @@
+# Runtime artifacts created by running the examples
+# (named pipes made with mkfifo, generated output, exercise results)
+**/pipe
+output.txt
+activities/countries/countries/
+
+# Snapshots of local system state (can leak usernames, paths, processes)
+processes.txt
+*.pid
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.#*
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets (never commit these)
+.env
+.env.*
+*.pem
+*.key
