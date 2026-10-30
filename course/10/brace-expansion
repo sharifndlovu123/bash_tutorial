@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# BASIC STRING MANIPULATION
+
+echo {hello,world,test}
+# hello world
+
+# notice how they split
+
+echo "{hello,world,test}"
+
+filename='my-file'
+echo "$filename."{pdf,txt,jpg}
+# my-file.pdf my-file.txt my-file.jpg , just strings
+
+# modify it to search now
+arr=( "$filename."{pdf,txt,jpg} )
+
+for item in "${arr[@]}"; do
+    echo "$item"
+done
+
+echo -e "\nSample2:"
+
+arr=(/etc/{foo,bar}/{1,2,3}.txt)
+for item in "${arr[@]}"; do
+    echo "$item"
+done

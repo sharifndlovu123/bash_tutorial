@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Combining brace expansion and globbing.
+# Work inside the ./files folder next to this script so nothing else is touched.
+cd "$(dirname "$0")/files" || exit 1
+
+# start clean, then recreate the files
+rm -f -- ./*
+touch {foo,bar,baz}.{txt,jpg}
+
+# a glob looks at the files that really exist
+printf '<%s>\n' ./*
+
+# brace expansion only generates strings, whether or not the files exist
+printf '<%s>\n' ./{foo,bar,baz}.{txt,jpg,mov}
+
+# no .mov files exist: the glob is left as a literal
+printf '<%s>\n' ./*.mov
+
+# combine them: brace expands first, then the glob matches real files
+ls ./*.{txt,mov}
+# ls: cannot access './*.mov': No such file or directory
+# ./bar.txt  ./baz.txt  ./foo.txt

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# simple print
+echo {1,2}
+
+# range
+echo {1..20}
+
+# 1 to 100 skipping 5
+echo {0..100..5}
+
+
+# # alt is sequence
+# seq 1 20
+# seq 5
+# seq 10 20
+
+# # start, step, end
+# seq 0 10 50
+
+for i in {1..10}; do
+    echo "$i"
+done
+
+for i in foo {1..10} bar {1..4} baz; do
+    echo "$i"
+done
+
+max=4
+
+# doesnt work
+for i in {1..$max}; do
+    echo "$i"
+done
+
+# use normal for
+for (( i = 0; i <= max; i++ )); do
+    echo "$i"
+done
+
+# use skip
+max=10
+for (( i = 0; i <= max; i+=2 )); do
+    echo "$i"
+done
