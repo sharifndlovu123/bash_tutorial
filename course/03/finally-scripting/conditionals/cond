@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+
+a=2
+b=2
+
+# important to know, double quotes allows variables, single doesnt. no quotes kills the spaces 
+if [[ $a == $b ]]; then
+	echo "a and b are the same"
+fi
+
+c=2
+d=3
+
+# important to know, double quotes allows variables, single doesnt. no quotes kills the spaces
+if [[ $c != $d ]]; then
+        echo "c and d arnt the same"
+
+fi
+
+
+if [[ -f file.txt ]]; then
+        echo "file.txt exists and is a file"
+fi
+
+while [[ -f file.txt ]]; do
+        echo "file.txt exists and is a file"
+        sleep 1
+done
+
+# until is the opposite of while
+until [[ -f file.txt ]]; do
+        echo "file.txt does not exist"
+        sleep 1
+done
+
+echo 'file is gone'
+
+# double brackets isnt always required
+if echo hi; then
+        echo "if statement was true"
+else
+        echo "if statement was false"
+fi
+
+
+# false and true is a command itself.
+true # returns 0
+echo $?
+false # returns 1
+echo $?
+
+
+# all conditionals 
+# help test
+
+
+# these also works as conditionals on the terminal but avoid them because they have else issues in different scenarios
+[ -f file.txt ]
+test -f file.txt

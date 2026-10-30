@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+for name in "$@"; do
+        echo "name is $name"
+done    
+
+
+# works for numbers too.
+for thing in {a..f}; do
+        echo "thing is $thing"
+done
+
+# this does NOT work: brace expansion happens before variable expansion,
+# so bash sees the literal text {1..$max}
+max=5
+for thing in {1..$max}; do
+        echo "thing is $thing"
+done
+
+for (( i = 0; i < max; i++)) do
+        echo "thing is $i"
+done
+
+# (()) is used for math syntax/arithmetic expressions

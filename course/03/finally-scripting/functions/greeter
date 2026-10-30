@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+greet() {
+	# name=$1 # global
+	local name=$1 # local 
+	echo "hello $name"
+	# by default it returns a code 0 is success else is fail
+	return 0
+}
+for name in "$@"; do
+	greet "$name" >> output.txt
+done
+
+var=$(greet dave)
+echo "var is $var"
+
+echo "Success $?"

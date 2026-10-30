@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Arguments are number like 
+# $1 and numbers
+
+# -n is this variable set?
+if [[ -n $1 ]]; then
+    name=$1
+else
+    read -p 'Enter your name: ' name
+fi
+
+echo "hello $name"
+
+
+# you can get help on expressions
+help '[['
+help '['
+help test

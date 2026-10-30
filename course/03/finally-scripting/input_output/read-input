@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# -r ensures backslashes dont escape. read only reads One line
+read -r foo
+echo "you said $foo"
+
+while read -r line; do
+    echo $line
+done
+
+

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# array expansion of all arguments
+for thing in "$@"; do
+	echo "thing is $thing"
+done
+
+
