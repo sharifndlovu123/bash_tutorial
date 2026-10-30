@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# find out how long a command took
+
+time echo hi
+
+# real = time on wall clock, human wait for x 
+# system = how long spent in system time (bash waiting on kernal to do something)
+# user = how long spent in user space (bash doing something)
+
+# run htop
+htop
+# look at cpu, green = usertime, red = systime
+
+# time is builtin
+type -a time  

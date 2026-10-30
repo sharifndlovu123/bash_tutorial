@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# when it comes to status of a bash, the last command gets the $? value
+
+# example
+cat /this-doesnt-exist | tr , :
+
+# we will get a 0 but expect a 1
+
+# THere is a way to debug whats happening
+
+# PIPESTATUS array var can be used to view error results
+echo "${PIPESTATUS[@]}"
+
+#  pipe status is gone after next command is ran. 
+(exit 3) | (exit 2) | (exit 1) | (exit 0)
+echo "${PIPESTATUS[@]}"
+
+(exit 3) | (exit 2) | (exit 1) | (exit 0)
+echo $?
+echo "${PIPESTATUS[@]}"

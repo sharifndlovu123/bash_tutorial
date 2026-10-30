@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#  if we set the PS4 var into "hello" makes the debug identification as that
+PS4='[debug]: '
+
+set -x #debug mode
+
+first_name=$1
+last_name=$2
+
+full_name="$first_name $last_name"
+
+set +x # turns it off
+
+if [[ $first_name == 'sharif' ]]; then
+    echo "oh hey its sharif"
+fi
+
+echo "Hello $full_name!"
+
+# We can run this script with ./filename
+# or bash filename
+# or bash -x . x = debug mode. it prints everything and informs us of whats happening, 
+# take note its setable in script aswell
+
+# syntax file checks, then check error
+bash -n filename 
+echo $?
+
+# check for undefined variables
+bash -u filename
+echo $?
+# take note if you have a global var or a var set in same line it wont be undefined
+foo=haha ./filename
+
+#  DONT USE THEM CHAINED like -un it wont work well
+
+# destroy env var
+unset something
+
+#  statically analyze your code, for checking positshell and bash scripts
+shellcheck filename
