@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# echo text , is basically >&1
+# means redirect file descriptor 1
+# var takes the std out not err.
+my-func () {
+    echo this goes to stdout >&1
+    echo this goes to stderr >&2
+    return 0
+}
+#  Important note, error codes are 8 bit so they go from 0-255
+
+
+var=$(my-func)
+code=$?
+
+echo "output=$var, code=$code"
+
+# if we want to throw the output away use >/dev/null or 1>/dev/null
+
+# redirect all output to dev/null
+var=$(my-func >/dev/null)
+code=$?
+
+echo "output=$var, code=$code"
+
+# redirect all output to 1>dev/null, basically same but explicit
+var=$(my-func 1>/dev/null)
+code=$?
+
+echo "output=$var, code=$code"
+
+# redirect std error but let stdout through 
+var=$(my-func 2>/dev/null)
+code=$?
+
+echo "output=$var, code=$code"
+
+# redirect std error to stdout  
+var=$(my-func 2>&1)
+code=$?
+
+echo "output=$var, code=$code"
+
+# redirect std out to dev null then std err to go where std out, it ends up going to err
+var=$(my-func >/dev/null 2>&1)
+code=$?
+
+echo "output=$var, code=$code"
+
+# reversed , std err to go to std out, std then out to go to null
+var=$(my-func 2>&1 >/dev/null )
+code=$?
+
+echo "output=$var, code=$code"

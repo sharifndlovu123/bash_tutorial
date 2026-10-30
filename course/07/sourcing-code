@@ -1,0 +1,3 @@
+#!/bin/bash
+
+# basically a library of functions, you ca create a source of functions and then pull them later on

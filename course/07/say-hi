@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#  exit if error
+source ./lib/greetings || exit 1
+
+# if ! . ./lib/greetings ; then
+#     exit 1
+# fi
+
+# or use . .lib/greetings. check help source and help .
+
+
+# bash 5.2+: source -p searches the given PATH for the file
+libdirs=./lib
+. -p "$libdirs" greetings || exit 1
+
+greet dave
+greet john
+goodbye buddy

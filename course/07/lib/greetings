@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+greet () {
+    echo "hello $1"
+}
+
+goodbye() {
+    echo "bye $1"
+}
+
+# we can add testing easily, anything in source will be run, 
+# bascially we could use a if __main__ so that it doesnt run for imports but bash eqv
+
+if ! (return 2>/dev/null); then
+    # we are being called directly
+    greet dave
+    goodbye john
+fi
+
+#  we just create a subshell, so we can use return, we discard the error messages and negate the result/
+#  in simpler terms if we can use the keyword "return" then we are being source, if not we are not being source
+
+# Now we can run our lib directly to test

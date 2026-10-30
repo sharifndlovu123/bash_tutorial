@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+source ./lib/greetings2 || exit 1
+
+name=buddy
+
+echo "Before greeting dave: $name"
+
+greet dave
+echo "After greeting dave: $name"
+
+# after this, our name changes to dav which is wrong. always remember to add local to the variables for functions
+# alt approach change method () into {}, so it runs in a subshell instead
+# alt 2, run greet dave in a  () subshell or {  ;}
