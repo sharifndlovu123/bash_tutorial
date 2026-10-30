@@ -1,0 +1,33 @@
+#!/bin/bash
+
+shopt -s extglob   # must be on before bash parses the patterns below
+
+# tend to be off by default
+# can be checked under shopt, run help shopt
+
+# we are looking for extglob, if its off turn it on with -s, off -u (set/unset)
+
+
+# if we do see odd event error messages, we can turn it off with set +H and back on with set -H
+
+# we want everything not text file
+ls -1 files/!(*.txt)
+
+# strict pattern match, matches foo or bar, + means must match it one or many times
+ls -1 files/+(foo|bar).txt
+ls -1 files/?(foo|bar).txt
+ls -1 files/*(foo|bar).txt
+
+# in extglob we will see this often: , evq to regex on the right after =>
++(thing) => /(thing)+/  # 1 or many times
+?(thing) => /(thing)?/ # 0 or one times
+*(thing) => /(thing)*/ # 0 or many times
+
+
+ls -1 files/+(foo).txt
+ls -1 files/@(foo).txt #@ enforces a stricter and tighter match of things
+
+
+ls -1 files/@(foo|bar).txt
+ls -1 files/@(foo|ba?).txt
+

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# view them all
+ls -1 files/
+
+echo files/*
+# basically means this
+echo files/bar.jpg files/bar.txt files/baz.jpg files/baz.txt files/foo.jpg files/foo.txt
+
+
+
+ls -1 files/*
+ls -1 files/*.txt
+ls -1 files/*.jpg
+ls -1 files/bar.*
+ls -1 files/baz.*
+
+# * matches 0 or anything 
+# but ? matches anything but it has to be something.
+ls -1 files/ba?.*
+
+# allows patterns, match a,b,c,r,z
+ls -1 files/ba[abcrz].*
+

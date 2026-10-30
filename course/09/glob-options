@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# 1. NULL GLOB
+ls empty/*
+# ls: cannot access 'empty/*': No such file or directory , what we expected
+
+printf '%s\n>' empty/*
+# <empty/*>
+
+touch empty/foo
+printf '%s\n' empty/*
+# <empty/foo>
+
+rm empty/foo
+printf '%s\n' empty/*
+# <empty/*>
+
+shopt -s nullglob
+printf '%s\n' empty/*
+# <>
+
+# nullglob ensures that null is allowed. without it it returns a value still
+
+
+# BUT ITS MESSY, if we ran: with nullglob
+ls empty/ # returns nothing
+ls empty/* # returns current dir content instead of nothing
+
+
+
+# 2. HIDDEN FILE
+touch empty/.hiddenfile
+echo empty/*
+# <empty/*>
+
+#  enable .glob to also glob .files
+shopt -s dotglob
+echo empty/*
+# <empty/*>
+
+# IF we dont turn it on but still want to see whats hidden
+arr=(empty/* empty/.*)
+
+# ensure nullglob and dotglob are not on at the same time
+
+# we will see this issue, a repeat, because it checks 2 different times
+shopt -s dotglob
+shopt -s nullglob
+arr=(empty/* empty/.*)
+# empty/.hiddenfile emtpy/.hiddenfile
+
+# allows recursive searches
+printf '%s\n' *
+shopt -s globstar
+# basically like find
+printf '%s\n' **
+
+
+
+
+
+shopt -u dotglob
+shopt -u nullglob
+shopt -u globstar
