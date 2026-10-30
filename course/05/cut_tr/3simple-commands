@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# awk, sort, uniq, wc, find, xargs
+
+# $0 is the whole line, $1 the first field. By default fields split on whitespace.
+awk '{ print $0 }' /etc/passwd
+awk '{ print $1 }' /etc/passwd
+
+# -F sets the field separator
+awk -F : '{ print $1 }' /etc/passwd
+awk -F : '{ print $3 }' /etc/passwd
+awk -F : '{ print $7 }' /etc/passwd
+
+# a comma in print inserts a space
+awk -F : '{ print $1, $7 }' /etc/passwd
+
+# awk has printf too
+awk -F : '{ printf("%s has shell %s\n", $1, $7) }' /etc/passwd
+
+# a condition before the braces: only run the action on matching lines
+awk -F : -v u="$USER" '$1 == u { print $7 }' /etc/passwd
+
+# sort, then uniq (uniq only collapses ADJACENT duplicates, so sort first)
+awk -F : '{ print $7 }' /etc/passwd | sort
+awk -F : '{ print $7 }' /etc/passwd | sort | uniq
+awk -F : '{ print $7 }' /etc/passwd | sort | uniq -c            # with counts
+awk -F : '{ print $7 }' /etc/passwd | sort | uniq -c | sort -rn # most common first
+
+# wc: lines, words, bytes
+grep file /usr/share/dict/words | wc -l
+grep file /usr/share/dict/words | wc -w
+grep file /usr/share/dict/words | wc -c
+
+# ---- find ----
+find .                    # everything, recursively
+find . -type f            # files
+find . -type d            # directories
+find /var/empty -type f   # (nothing: an empty directory)
+
+# count what is in a directory
+find /usr/share | wc -l
+find /usr/share -type f | wc -l
+find /usr/share -type d | wc -l
+find /usr/share -type l | wc -l   # symlinks
+# the counts do not add up: there are other types (named pipes, sockets)
+
+find /usr/share -type f -name '*.txt'
+find /usr/share -maxdepth 1 -type f -name '*.txt'   # -maxdepth goes before tests
+
+# -exec runs a command per result. {} is the file, and the terminator ';'
+# must be quoted or escaped so bash does not eat it
+find /usr/share -type f -name '*.txt' -exec echo "found" {} ';'
+find /usr/share -type f -name '*.txt' -exec echo "found" {} +   # batch many files per call
+
+# xargs batches lines from stdin into arguments
+find /usr/share -type f -name '*.txt' | xargs echo hi
+
+# safe for names containing spaces/newlines: separate with null bytes
+find /usr/share -type f -name '*.txt' -print0 | xargs -0 echo hi

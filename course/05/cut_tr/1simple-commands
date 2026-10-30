@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Run from this folder: cut, tr on CSV files
+
+# tr = translate characters
+cat simple.csv | tr , '\t'
+
+# cut: -d = delimiter, -f = field(s)
+cat simple.csv | cut -d , -f 2
+cat simple.csv | cut -d , -f 1-3
+cat simple.csv | cut -d , -f 1-2,4 | tr , '\t'
+
+cat complex.csv | cut -d , -f 1
+cat complex.csv | cut -d , -f 3-
+
+echo "$PATH" | cut -d : -f 1
+echo "$PATH" | cut -d : -f 2
+echo "$PATH" | cut -d : -f 3
