@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+#!/bin/bash
+
+path='/home/dave/foo.txt'
+
+echo "Original: $path"
+
+echo "$path" | tr a o
+
+echo "${path/a/o}"
+echo "${path/o/a}" # notice it missed foo
+echo "${path//o/a}" # // forces every time it finds o
+echo "${path//[af]/a}" 
+
+echo ""
+echo "Original: $path"
+
+# extras
+dirname "$path"
+basename "$path"
+#  direct
+
+
+# take note pound goes left to right
+# from beginning of line (#), match * until / and delete it
+echo "${path#*/}"
+echo "${path##*/}" # for all
+
+# % goes right to left
+# match beginning of line (%), match / and delete *
+echo "${path%/*}"
+
+
+# substrings
+echo ""
+name="dave eddy"
+echo "Original name: $name"
+
+# start : length
+echo "${name:0}"
+echo "${name:1}"
+echo "${name:2}"
+echo "${name:3:5}"
+
+# will fail, because it thinks if name not set, use literal string 1
+echo "${name:-1}"
+
+# add space
+echo "${name: -1}"
+echo "${name: -3}"
+
+
+# loop over char
+echo ""
+s="hi myname is eddy"
+len=${#s}
+for (( i=0; i < len; i++)); do
+    c=${s:i:1}
+    echo "${c}"
+done
+
+# look into parameter transformation
+echo "$s"
+echo "${s@A}"
+echo "${s@a}"
+echo "${s@Q}"
+echo "${s@U}"
+

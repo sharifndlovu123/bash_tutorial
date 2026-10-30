@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+arr=(food bar baz)
+
+# s = format specifier and a newline
+printf '%s\n' hello how are you
+
+printf '%s\n' ${arr[@]}
+
+# start at a
+printf '%s\n' ${arr[@]:1}
+
+# start at 0 but only 2
+printf '%s\n' ${arr[@]:0:2}
+
+# transform a's into o's
+printf '%s\n' ${arr[@]//a/0}
+
+# z removed from end
+printf '%s\n' ${arr[@]%z}
+
+# b removed from beginning
+printf '%s\n' ${arr[@]#b}
+
+# stringify
+(IFS=_; echo "${arr[*]}")

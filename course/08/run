@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# default vals
+name=${1:-$USER}   # ${var:-default} uses the default if var is unset or empty
+
+# required, it breaks the code
+surname=${2?'You must supply a name'} # :? forces a value, no : allows ''
+
+echo "Hello $name $surname"

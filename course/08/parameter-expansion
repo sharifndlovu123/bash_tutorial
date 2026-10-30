@@ -1,0 +1,36 @@
+#!/bin/bash
+
+s='dave eddy'
+echo "$s"
+
+# length chars
+echo "${#s}"
+
+# capitalize first letter
+echo "${s^}"
+
+# uppercase
+echo "${s^^}"
+
+# capitalize d's
+echo "${s^^d}"
+
+# capitalize first d
+echo "${s^d}"
+
+# multiples, only works with patterns, capitalize d's and a's
+echo "${s^^[da]}"
+
+
+t="DAVE EDDY"
+
+# lowercase
+echo "${t,,}"
+
+# lower first letter
+echo "${t,}"
+
+# lower case d's and a's
+echo "${t,,[da]}"
+
+
