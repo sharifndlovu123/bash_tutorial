@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# used to trim, trims the newline
+mapfile -t array < data.txt
+
+# print array
+printf '<%s>\n' "${array[@]}"
+
+# problem what if that file is too big, this can be dangerous. this is all written to memory

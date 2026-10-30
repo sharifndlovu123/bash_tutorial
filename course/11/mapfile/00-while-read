@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# basic way to read that file into an array
+array=()
+
+# read file into array
+while read -r line; do
+	array+=("$line")
+done < data.txt
+
+# print array
+printf '<%s>\n' "${array[@]}"

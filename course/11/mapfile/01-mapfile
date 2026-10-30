@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+mapfile arr < data.txt
+
+# print array
+printf '<%s>\n' "${arr[@]}"
+
+# you will notice one problem, mapfile doesnt trim the default delimiter which is newline, it retains the newline

@@ -1,0 +1,70 @@
+#!/bin/bash
+
+#  man found here. 
+# man 3 printf
+
+printf 'hello how are you \n'
+
+# MAINLY USED FOR FORMATTING
+s="hello world"
+
+# %S means format like a string, 
+# NB the first argument we give, will get the first format specified
+# printf "$s"
+
+printf '%s\n' "$s"
+
+printf 'my string is (%s)\n' "$s"
+
+printf '%s     %s\n' "$s" "test"
+
+# basically uses padding/space but the text itself is counted within the padding
+printf '%5s %5s\n' "$s" "test"
+printf '%10s %10s\n' a b
+
+# want it left justified use -
+printf '%-10s %-10s\n' a b
+#  we can add <> to see them
+printf '<%-10s> <%-10s>\n' a b
+
+# special *, used for allowing arguments, such as 10, allows -*
+printf '<%*s>\n' 10 hello
+
+# %d means we are formatting a number
+printf '<%5d>\n' 10 
+
+# pad with 0s
+printf '<%05d>\n' 10 
+# printf '<%05d>\n' hello #fails, only numbers with d
+
+# note it wont work with octal numbers
+printf '%d\n' 06 
+printf '%d\n' 07 
+# printf '%d\n' 08 # fails because its octal 
+# change to 010
+printf '%d\n' 010 
+
+# allows hex
+printf '%d\n' 0x0a 
+printf '%d\n' 0xff 
+
+
+#  for more info on these check help printf, format characters. look up man printf 3
+
+# it will safely escape it for us, anything scary in the shell
+printf '%q\n' 'foo$bar'
+
+#  inteprets backslash , bash allows binary
+printf '%b\n' '\xff' # a hex number, then we retry to read it via a hex reader through pipe
+printf '%b\n' '\xff' | xxd # a hex number, then we retry to read it via a hex reader through pipe
+
+printf 'hello world%b' '\x0a' | xxd
+
+# 0a means new line
+
+
+# place the output into a variable
+printf 'hello %s' dave
+printf -v var 'hello %s' dave
+echo -e "\n$var"
+

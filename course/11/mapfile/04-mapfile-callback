@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# callback to process the line, so we can callback functions
+#  allows us to process line by line
+my_func() {
+	# the callback receives the INDEX of the line first, then the line itself
+	local index=$1
+	local line=$2
+	echo "(mapfile) called with line $index: $line"
+}
+
+# -c means read x at a time then fire call back, -C callback, each time quantum = c, default c is 5000
+mapfile -t -C my_func -c 1 foo < data.txt
+
+# print array
+printf '<%s>\n' "${foo[@]}"

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# check  man strftime
+date
+
+datefmt='%m/%d/%Y %H:%M:%S'
+
+date +"$datefmt"   # external date command; flags differ between GNU and BSD
+
+# check help printf, notice %(fmt)T
+printf "the date is %($datefmt)T\n"
+
+#  this fails, because it things dave si the first arguments for the first %.
+printf "the date is %($datefmt)T name=%s\n" dave
+
+# to resolve this we use sentinal values, which is given to the fmt date
+printf "the date is %($datefmt)T name=%s\n" -1 dave
+# -1 current date and time
+
+printf "the date is %($datefmt)T name=%s\n" -2 dave
+# -2 starting date and time of shell
+
+
+# 0 and above is epoch times
+# num of seconds elapsed since jan 1 1970
+printf "the date is %($datefmt)T name=%s\n" 0 dave
+
+
+# current date epoch
+date +%s
+printf '%(%s)T\n' -1
+
+#  seconds shell has been running
+echo $SECONDS
+echo $EPOCHSECONDS
+echo $EPOCHREALTIME # same but micro seconds included

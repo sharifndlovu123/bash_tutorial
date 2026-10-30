@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# regular expressions are built into bash, bash has its own as well
+#  we are extracting from the file names
+
+# ^ means start of line
+# $ means end of text
+re='^(dave|joe)$' # change into
+re='^(d|j).*$' # beginning d or j and ending with anything
+input='dave'
+
+# if matches regex; within this =~, theres a hidden magic var placed called BASH_REMATCH, its an array
+if [[ $input =~ $re ]]; then
+    echo match
+    printf '%s\n' "${BASH_REMATCH[@]}"
+
+    #  the output might be tricky, but here out it returns values
+    full_string="${BASH_REMATCH[0]}" # full string everything
+    name="${BASH_REMATCH[1]}" # first capture group, the match
+else
+    echo no match
+fi

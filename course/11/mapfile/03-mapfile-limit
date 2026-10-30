@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# limits it to first 2 lines, read up to x lines
+mapfile -t -n 2 foo < data.txt
+
+# print array
+printf '<%s>\n' "${foo[@]}"

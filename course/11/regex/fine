@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+for f in ./images/*; do
+#  we get the base name of the file
+    bname=$(basename "$f")
+    # pipe it to cut, cut based on - and get the first field
+    name=$(echo "$bname" | cut -d - -f 1)
+    date=$(echo "$bname" | cut -d - -f 2- | cut -d . -f 1 | xargs echo)
+
+    # xargs will help get rid of white space
+    echo "$date: $name"
+
+done
