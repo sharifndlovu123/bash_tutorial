@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo 'hello\nworld'
+
+echo -e 'hello\nworld'
+echo -e 'hello\tworld'
+
+echo ""
+#  but now what if we dont want to use -e to expand special chars
+# $''= means expand special chars
+
+msg='hello\nworld'
+echo "$msg"
+msg=$'hello\nworld'
+echo "$msg"
+msg=$'hello\tworld'
+echo "$msg"
+
+echo ""
+
+
+echo $'foo\nbar'
+echo $'foo\tbar'
+echo $'foo\vbar' # vertical tab
+echo $'foo\b\b\bbar' # backspace,but because the chars are already written we can still see them below with xxd
+echo $'foo\b\b\bbar' | xxd
+
+#  good to use vars
+tab=$'\t'

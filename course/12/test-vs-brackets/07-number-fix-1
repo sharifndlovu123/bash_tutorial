@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+a=9
+b=10
+
+# we can apply options to use gt lt etc with [[]]
+if [[ $b -gt $a ]]; then
+	echo "$b is greater than $a"
+else
+	echo "uh oh"
+fi
