@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#  basically key value
+declare -A arr
+
+
+# MUST DECLARE WHEH USING ASS Arrays, only in bash v4.  
+if ! declare -A array; then
+    echo "iuh oh cannot make ass array, due to bash version.; ass arrays are newer"
+    exit 1 
+fi
+
+
+
+arr[foo]=1
+arr[bar]=2
+arr[baz]=3
+
+echo "${arr[foo]}"
+echo "${arr[bar]}"
+echo "${arr[baz]}"
+echo "${arr[fake]}"
+
+echo "${arr[*]}" # Stringify
+echo "${arr[@]}"
+
+#  iterate over keys
+echo -e "${!arr[@]}\n"
+
+for key in "${!arr[@]}"; do
+    val=${arr[$key]}
+    echo "got $key"
+done

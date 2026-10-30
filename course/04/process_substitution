@@ -1,0 +1,84 @@
+#!/usr/bin/env bash 
+
+# syntax is <(...) or >(...)
+
+# add -c for count
+words=$(grep d /usr/share/dict/words)
+
+i=0
+for word in "$words"; do
+    echo "$word"
+    ((i++))
+done
+
+echo "found $i words"
+
+echo -e "\n"
+
+i=0
+for word in $words; do
+    echo "$word"
+    ((i++))
+done
+
+echo "found $i words"
+
+echo take note of the error here. it found all words but the next found 1 only
+
+# AVOID both of these syntaxes when counting, use while
+# this reads any word in standard input but we want it to use a VAR, so we use a here-string
+# here string lets us pipe data into a var we already have
+
+
+#  < indicates looking for a file
+i=0
+while read -r word; do
+    echo "$word"
+    (( i++ ))
+done < /usr/share/dict/words  # but what if we want to use a command
+echo "found $i words"
+
+i=0
+while read -r word; do
+    echo "$word"
+    (( i++ ))
+done <<< "$words"
+
+echo "found $i words"
+
+# both are slightly slower. we can do it better
+
+# we string that data into the while loop
+
+i=0
+grep d /usr/share/dict/words | while read -r word; do
+    echo "$word"
+    ((i++))
+done
+echo "found $i words"
+
+# but notice when we run this we get 0 words. why? 
+#  anything to the right of a PIPE |, will be run on a subshell
+
+# SOLUTION, we use process substitution
+i=0
+while read -r word; do
+    echo "$word"
+    (( i++ ))
+done < <(grep d /usr/share/dict/words)  # basically read from a process. < means look for file, then <(...) gets replaced with a file, that file can be consumed like it was a command
+
+echo "found $i words"
+
+
+# if your confused uses this and see the outputs
+
+echo $(uname)       # prints: Linux
+
+echo <(uname)       # prints: /dev/fd/63 (a path to a file descriptor, not the output)
+
+cat <(uname)
+less <(uname)
+
+# One cool feature with this approach within a while
+# This while loop starts processing, it doesnt wait for the whole thing or file to load. it works with stream.
+#  BUT because we dont wait, we dont have the exit code of grep, so if it fails no exit because its masked

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+declare -a array
+array=(bar foo baz "this is a test")
+array3=([0]="test" [2]="test2")   # sparse array
+# 
+# declare -a array==(bar foo baz "this is a test")
+# or declare early
+# view help declare 
+
+
+echo "0: ${array[0]}"
+
+echo "-1: ${array[-1]}"
+
+
+echo "@: ${array[@]}"
+echo "*: ${array[*]}"
+
+# These two arnt the same example.
+
+echo "loop over *"
+# star is for stringify the elements of an array
+for item in "${array[*]}"; do
+    echo "item is $item"
+done
+
+echo "loop over @"
+# @ when you want to iterate
+
+for item in "${array[@]}"; do
+    echo "item is $item"
+done
+
+# copy array, () means create new array, then we can append
+copyarray=("${array[@]}" extra extra)
+
+# extend
+copyarray+=(buddy guy joe)
+
+
+# display attributes and value of each NAME ; pretty print
+declare -p copyarray
+
+
+# count
+echo "${#array[@]}"
+
+# count of string
+echo "${#array[1]}"

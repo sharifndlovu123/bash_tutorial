@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+
+array=(
+    foo
+    bar
+    baz
+)
+
+# what char does it use to strigfy, it uses a magical var IFS, 
+# basically states how to break up args and split words etc, its a bash builtin var
+# by default it IFS=" \n\t"; if you unset IFS it defaults
+echo "array is: ${array[*]}" #stringify
+
+
+# sample
+IFS=hello
+echo -e "array is: ${array[*]}\n"
+# notice how the gaps have the first letter "H"
+
+IFS=,
+echo -e "array is: ${array[*]}\n"
+# notice how the gaps have the first letter ","
+
+
+# it works with subshells, anything inside this sub shell is inaccessible 
+
+(
+    IFS=,
+    echo -e "subshell array is: ${array[*]}\n"
+)

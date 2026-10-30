@@ -1,0 +1,59 @@
+#!/bin/bash 
+
+# NEVER MIX UP CMDS WITH USER ARGUMENT INPUT
+
+processed-indexed() {
+    local arguments=("$@")
+    echo "found: ${#arguments[@]} arguments"
+
+    local IFS=,
+    echo "${arguments[*]}"
+}
+
+process-associative() {
+    local arguments=("$@")
+    echo "found: ${#arguments[@]} total arguments"
+
+    declare -A unique
+    local item
+    for item in "${arguments[@]}"; do
+        unique[$item]=1
+    done
+
+    echo "found: ${#unique[@]} unique arguments"
+}
+
+process-commands() {
+    local arguments=("$@")
+    echo "found: ${#arguments[@]} total arguments"
+
+
+    local item
+    # same as for item "${arguments[@]}"; do 
+    for item; do # basically iterates over arguments, if None no iteration
+        echo "running command: $item"
+        "$item" #hmm, take note it runs it as a cmd
+    done
+
+    echo "found: ${#unique[@]} unique arguments"
+}
+
+# moves the array one right
+cmd=$1
+echo "script called with args: $*"
+shift
+echo "script called with args: $*"
+# exit
+
+case "$cmd" in 
+    indexed)
+        process-indexed "$@";;
+    associative)
+        process-associative "$@";;
+    commands)
+        process-commands "$@";;
+    *)
+        echo "unknown cmd: $cmd" >&2 # export to stderr, thus 2
+        exit 1 ;;
+esac
+

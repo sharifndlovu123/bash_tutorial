@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# basically math '(('
+# use - help let
+
+
+thing=$(( 2 + 5 ))
+echo $thing
+
+#  power of 2
+echo $(( 9 ** 2 ))
+
+declare -i a
+declare -i b
+
+a=4
+b=3
+
+(( d = a + b))
+echo $(( $a * $b ))
+echo $(( a * b ))
+echo $(( $a - $a ))
+echo $(( $b + $b ))
+
+# check expressions or numbers from users
+[[ $a == [0-9]* ]]
+
+# by default a string used as arithmetic defaults to 0
+c=hello
+echo $(( $c ))
+
+
+# increment
+i=2
+(( i++ ))
+(( i*= 5 )) # multiply by 5
+(( i>>= 5 )) #shift to the right 5 times
+(( i<<= 5 )) #shift to the left 5 times
+(( i%2 )) # mod 
+(( max = a > b ? a : b )) # ternary operator 
+# more under "help let"
+
+
+# TRICKY , in math sometimes $? might = Failure if 0. so avoid set -e in math
+if (( a % 2 == 0 )); then
+    echo number is even
+elif (( a % 3 == 0 )); then
+    echo number is divisible by 3
+else
+    echo number is not divisible by 2 or 3
+fi
+
+x=0
+while ((x < 10)); do
+    echo "X: is $x"
+    ((x++))
+done
+
+# leading zeros can get messy
+
+f=01
+echo "$f" # as string
+echo $(( f )) # as number

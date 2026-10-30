@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+
+i=5
+my-func() {
+    i=6
+    echo hello
+}
+
+# called via SUB SHELL
+echo -e "\nSUB SHELL:"
+thing=$(my-func)
+echo "thing is $thing"
+
+echo "i is $i"
+
+# called via in same SHELL
+echo -e "\nMain SHELL:"
+my-func
+
+echo "i is $i"
+
+
+# called via SUB SHELL, valid syntax for bash v5 and higher
+echo -e "\nMain SHELL:"
+thing=${ my-func; }
+echo "thing is $thing"
+
+echo "i is $i"
+
+# main shell code will always be faster
+# if its run on main shell it can impact global vars

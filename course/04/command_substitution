@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# run commands, not strings
+thing=`whoami`
+
+thing2=`uname`
+
+
+echo -e "$thing\n $thing2"
+
+
+echo "BACKTICKS NOTATION:\n"
+# problem at hand this will fail, because they close right after a another `
+echo `echo `whoami``
+# use backticks to not close
+echo `echo \`whoami\``
+
+# this can get very messy; if we have many example
+echo `echo \`echo \\\`whoami\\\`\``
+
+echo "DOLLAR-PARRENS NOTATION:\n"
+echo $(whoami)
+echo $(echo $(whoami))
+echo $(echo $(echo $(whoami)))
+
+#  AVOID BACKTICKS< USE COMMAND SUBSTITUTION 
+
+#  runs as a subshell
+my-func() {
+    echo hello
+}
+
+test=$(my-func)
+echo "output from function is $test"
